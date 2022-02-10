@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="./style.css">
 
     <title>Update value</title>
 </head>
@@ -13,13 +13,17 @@
 
 
     
-
+    <div class="headsection">
+        <h1>Enter the list of items</h1>
         
-        <input type="text"  placeholder="enter your name" id="names"   class="upsection">
-        <input type="text"  placeholder="Enter your location" id="location" class="upsection">
-        <input type="text" placeholder=" Enter company name"  id="company"   class="upsection">
+        <input type="text"  placeholder="enter your name" id="names"   class="upsection"       required>
+        <input type="text"  placeholder="Enter your location" id="location" class="upsection"  required>
+        <input type="text" placeholder=" Enter company name"  id="company"   class="upsection"  required>
         <br>
-        <button  onclick="submitFun()" style="background-color: greenyellow;"   class="enter">Enter</button>
+        <button  onclick="submitFun()" class="enter">Enter</button>
+
+
+    </div>
 
         <div id="items">
 

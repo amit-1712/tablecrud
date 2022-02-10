@@ -6,36 +6,55 @@ const items = document.getElementById("items");
 let targetElement;
 
 
+
+
+
+
 function submitFun() {
 
-    const n = names.value;
-    const o = loc.value;
-    const p = company.value;
-
-    if (targetElement) {
-        updateFun(targetElement,n,o,p);
-        targetElement = "";
 
 
+    if (names.value.length == 0 || loc.value.length==0 || company.value.length==0) {
+
+        alert("please fill all the inputs");
     }
     else {
 
+        const n = names.value;
+        const o = loc.value;
+        const p = company.value;
 
-        var item = createItem(n, o, p);
+        if (targetElement) {
+            updateFun(targetElement, n, o, p);
+            targetElement = "";
 
-        items.appendChild(item);
+
+        }
+        else {
+
+
+            var item = createItem(n, o, p);
+
+            items.appendChild(item);
+
+        }
+
 
     }
+
+
+
+
 
 }
 
 
 
-function updateFun(targetElement,n,o,p) {
+function updateFun(targetElement, n, o, p) {
     targetElement.querySelector(".para1").innerHTML = n;
     targetElement.querySelector(".para2").innerHTML = o;
     targetElement.querySelector(".para3").innerHTML = p;
-    
+
 
 }
 
@@ -46,7 +65,7 @@ function createItem(n, o, p) {
 
     const divs = document.createElement("div");
 
-
+    divs.classList.add("container");
 
     const para1 = document.createElement("p");
     para1.classList.add("para1");
@@ -68,6 +87,7 @@ function createItem(n, o, p) {
 
 
     const deleteItem = document.createElement("button");
+    deleteItem.classList.add("btn-delete")
 
     deleteItem.innerText = "delete";
 
@@ -85,6 +105,7 @@ function createItem(n, o, p) {
     company.value = "";
 
     const updateItem = document.createElement("button");
+    updateItem.classList.add("btn-update");
     updateItem.innerText = "update";
     divs.appendChild(updateItem);
 
@@ -110,3 +131,4 @@ function createItem(n, o, p) {
 
 
 }
+
