@@ -3,8 +3,30 @@ const loc = document.getElementById("location");
 const company = document.getElementById("company");
 const items = document.getElementById("items");
 
-let targetElement;
 
+
+
+let targetElement;
+var arr = JSON.parse(localStorage.getItem("data"));
+
+if(arr){
+    displayNotes();
+
+}
+else{
+    localStorage.setItem("data",JSON.stringify([]));
+}
+
+
+function displayNotes(){
+    items.innerHTML = "";
+
+    arr.forEach((x,i)=>{
+        
+        items.appendChild(createItem(x.n,x.o,x.p,i));
+    })
+
+}
 
 
 
@@ -25,17 +47,38 @@ function submitFun() {
         const p = company.value;
 
         if (targetElement) {
-            updateFun(targetElement, n, o, p);
-            targetElement = "";
+            // updateFun(targetElement, n, o, p);
+            
+            arr = arr.map((e,j)=>{
+            if(j==targetElement.id){
+                return {
+                    n,o,p
+                }
+            }
+            return e;
+            
 
+        })
+        displayNotes();
+        localStorage.setItem("data",JSON.stringify(arr));
+        targetElement = "";
+        
 
         }
         else {
 
 
-            var item = createItem(n, o, p);
+            // var item = createItem(n, o, p);
 
             items.appendChild(item);
+            arr.push({
+                n,o,p
+            });
+
+            localStorage.setItem("data",JSON.stringify(arr));
+            displayNotes();
+
+
 
         }
 
@@ -60,16 +103,20 @@ function updateFun(targetElement, n, o, p) {
 
 
 
-function createItem(n, o, p) {
-
+function createItem(n, o, p,i) {
+    console.log(n);
+    console.log(o);
+    console.log(p);
 
     const divs = document.createElement("div");
 
     divs.classList.add("container");
+    divs.setAttribute("id",i);
 
     const para1 = document.createElement("p");
     para1.classList.add("para1");
-    para1.innerHTML = n
+    para1.innerHTML = n;
+
     divs.appendChild(para1);
 
     const para2 = document.createElement("p");
@@ -97,7 +144,15 @@ function createItem(n, o, p) {
 
         alert("deleted")
 
-        divs.remove();
+        // divs.remove();
+        arr = arr.filter((e,j)=>{
+            return j!==i;
+
+        })
+        
+        displayNotes();
+        localStorage.setItem("data",JSON.stringify(arr));
+        
 
     }
     names.value = "";
@@ -116,9 +171,10 @@ function createItem(n, o, p) {
         loc.value = para2.innerHTML;
         company.value = para3.innerHTML;
         targetElement = divs;
+        
     }
 
-
+    
 
     return divs;
 
