@@ -68,7 +68,7 @@ function submitFun() {
         else {
 
 
-            // var item = createItem(n, o, p);
+            var item = createItem(n, o, p);
 
             items.appendChild(item);
             arr.push({
